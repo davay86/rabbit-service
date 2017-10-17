@@ -34,12 +34,7 @@ metadata:
 spec:
     type: LoadBalancer
     ports:
-    - name: web
-        port: 15672
-        protocol: TCP
-    - name: tcp
-        port: 5672
-        protocol: TCP
+    - port: 15672
     selector:
         app: rabbit-mq
         tier: messaging
