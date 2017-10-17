@@ -35,6 +35,7 @@ spec:
     type: LoadBalancer
     ports:
     - port: 15672
+    - port: 5672
     selector:
         app: rabbit-mq
         tier: messaging
