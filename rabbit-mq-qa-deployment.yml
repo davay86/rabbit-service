@@ -13,6 +13,18 @@ spec:
             containers:
             - name: rabbit-mq
               image: bitnami/rabbitmq:latest
+              readinessProbe:
+                tcpSocket:
+                  port: 5672
+                initialDelaySeconds: 120
+                timeoutSeconds: 60
+                periodSeconds: 15
+              livenessProbe:
+                tcpSocket:
+                  port: 5672
+                initialDelaySeconds: 120
+                timeoutSeconds: 60
+                periodSeconds: 15
               env:
               - name: RABBITMQ_USERNAME
                 value: hystrixUser
