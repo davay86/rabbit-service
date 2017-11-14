@@ -77,7 +77,7 @@ spec:
         env:
         - name: RABBITMQ_DEFAULT_USER
           value: hystrixUser
-        - name: RABBITMQ_DEFAULT_PASS
+        - name: RABBITMQ_DEFAULT_PASSWORD
           value: password
         - name: RABBITMQ_ERLANG_COOKIE
           valueFrom:
