@@ -6,6 +6,7 @@ node{
 
     stage('Release to QA'){
         sh "kubectl config use-context aws_QA"
+        sh "kubectl create secret generic rabbitmq-config --from-literal=erlang-cookie=c-is-for-cookie-thats-good-enough-for-me"
         sh "kubectl apply -f rabbit-mq-qa-deployment.yml --record"
     }
 }

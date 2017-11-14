@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: rabbit-mq
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+              app: rabbit-mq
+              tier: messaging
+        spec:
+            containers:
+            - name: rabbit-mq
+              image: bitnami/rabbitmq:latest
+              readinessProbe:
+                tcpSocket:
+                  port: 5672
+                initialDelaySeconds: 120
+                timeoutSeconds: 60
+                periodSeconds: 15
+              livenessProbe:
+                tcpSocket:
+                  port: 5672
+                initialDelaySeconds: 120
+                timeoutSeconds: 60
+                periodSeconds: 15
+              env:
+              - name: RABBITMQ_USERNAME
+                value: hystrixUser
+              - name: RABBITMQ_PASSWORD
+                value: password
+              ports:
+              - containerPort: 5672
+              - containerPort: 15672
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: rabbit-mq-gateway
+    labels:
+        app: rabbit-mq
+        tier: messaging
+spec:
+    type: LoadBalancer
+    ports:
+    - name: web
+      protocol: TCP
+      port: 15672
+      targetPort: 15672
+    - name: message
+      protocol: TCP
+      port: 5672
+      targetPort: 5672
+    selector:
+        app: rabbit-mq
+        tier: messaging
