@@ -68,6 +68,7 @@ spec:
                   rm /etc/resolv.conf.new;
                 fi;
                 until rabbitmqctl node_health_check; do sleep 1; done;
+                echo $HOSTNAME
                 if [[ "$HOSTNAME" != "rabbitmq-0" && -z "$(rabbitmqctl cluster_status | grep rabbitmq-0)" ]]; then
                   rabbitmqctl stop_app;
                   rabbitmqctl join_cluster rabbit@rabbitmq-0;
@@ -80,10 +81,7 @@ spec:
         - name: RABBITMQ_DEFAULT_PASSWORD
           value: password
         - name: RABBITMQ_ERLANG_COOKIE
-          valueFrom:
-            secretKeyRef:
-              name: rabbitmq-config
-              key: erlang-cookie
+          value: ck8FC0uJ9vePIhLr
         ports:
         - containerPort: 5672
           name: amqp
