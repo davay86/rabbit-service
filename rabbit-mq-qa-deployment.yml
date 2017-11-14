@@ -68,9 +68,10 @@ spec:
                   rm /etc/resolv.conf.new;
                 fi;
                 until rabbitmqctl node_health_check; do sleep 1; done;
-                if [[ "$HOSTNAME" != "rabbitmq-0" && -z "$(rabbitmqctl cluster_status | grep rabbitmq-0)" ]]; then
+                if [[ "$HOSTNAME" != "rabbitmq-0..abbitmq.default.svc.cluster.local" && -z "$(rabbitmqctl cluster_status | grep rabbitmq-0)" ]]; then
+                  echo $HOSTNAME;
                   rabbitmqctl stop_app;
-                  rabbitmqctl join_cluster rabbit@rabbitmq-0;
+                  rabbitmqctl join_cluster rabbit@rabbitmq-0.rabbitmq.default.svc.cluster.local;
                   rabbitmqctl start_app;
                 fi;
                 rabbitmqctl set_policy ha-all "." '{"ha-mode":"exactly","ha-params":3,"ha-sync-mode":"automatic"}'
