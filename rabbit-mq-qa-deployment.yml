@@ -1,3 +1,7 @@
+#Ensure secret key rabbitmq-config exists before running.
+#If it doesn't exist run:
+# kubectl create secret generic rabbitmq-config --from-literal=erlang-cookie=c-is-for-cookie-thats-good-enough-for-me
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -11,7 +15,7 @@ spec:
     name: http
   selector:
     app: rabbitmq
-  type: NodePort # Or LoadBalancer in production w/ proper security
+  type: LoadBalancer #NodePort Or LoadBalancer in production w/ proper security
 
 ---
 
@@ -42,7 +46,7 @@ metadata:
   name: rabbitmq
 spec:
   serviceName: "rabbitmq"
-  replicas: 5
+  replicas: 3
   template:
     metadata:
       labels:
