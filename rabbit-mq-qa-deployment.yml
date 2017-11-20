@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: rabbitmq-gateway
+  name: rabbitmq
   labels:
     app: rabbitmq
     tier: messaging
