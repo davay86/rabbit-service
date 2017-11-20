@@ -70,9 +70,15 @@ spec:
             value: "k8s"
           - name: AUTOCLUSTER_DELAY
             value: "60"
+          - name: AUTOCLUSTER_LOG_LEVEL
+            value: "debug"
           - name: K8S_ADDRESS_TYPE
             value: "ip"
           - name: AUTOCLUSTER_CLEANUP
             value: "true"
           - name: CLEANUP_WARN_ONLY
             value: "false"
+          - name: CLEANUP_INTERVAL
+            value: "60"
+          - name: LANG
+            value: "en_US.UTF-8"
