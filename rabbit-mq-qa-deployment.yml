@@ -29,7 +29,7 @@ metadata:
   name: rabbitmq
 spec:
   serviceName: rabbitmq
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
