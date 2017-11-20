@@ -4,9 +4,9 @@ metadata:
   name: rabbitmq-gateway
   labels:
     app: rabbitmq
-    type: LoadBalancer
+    tier: messaging
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
    - name: http
      protocol: TCP
