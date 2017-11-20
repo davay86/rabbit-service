@@ -57,10 +57,6 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 5
         imagePullPolicy: Always
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/bin/sh", "-c", 'rabbitmqctl set_policy ha-all "." "{"ha-mode":"exactly","ha-params":3,"ha-sync-mode":"automatic"}"']
         env:
           - name: MY_POD_IP
             valueFrom:
